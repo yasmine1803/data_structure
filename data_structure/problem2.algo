@@ -1,0 +1,67 @@
+
+/* algorithm using a procedure for calculating the dot product */
+PROCEDURE dot_product( VAR ps:FLOAT, v1:ARRAY_OF FLOAT[3],v2:ARRAY_OF FLOAT[3])
+VAR
+    x,y,z:FLOAT;
+BEGIN
+    x=v1[0]*v2[0]
+    y=v1[1]*v2[1]
+    z=v1[2]*v2[2]
+    ps=x+y+z
+END
+/* main program */
+ALGORITHM dot_product
+VAR
+    v1: ARRAY_OF FLOAT[3];
+    v2: ARRAY_OF FLOAT[3];
+    ps: FLOAT;
+    i,j=INTEGER;
+BEGIN
+    write("insert v1: x,y,z")
+    FOR i FROM 0 TO 2 STEP 1  DO
+        read(v1[i])
+    END_FOR
+    write("insert v2: x,y,z")
+    FOR j FROM 0 TO 2 STEP 1  DO
+        read(v2[j])
+    END_FOR
+    dot_product(ps,v1,v2)
+    IF (ps==0) THEN
+        write("v1 et v2 sont orthogonaux")
+    ELSE
+        write("v1 et v2 sont pas orthogonaux")
+    END_IF
+END
+
+/* algorithm using a function for calculating the dot product */
+
+FUNCTION dot_product(v1:ARRAY_OF FLOAT[3],v2:ARRAY_OF FLOAT[3]) : FLOAT
+VAR
+    ps:FLOAT;
+BEGIN
+    ps=v1[0]*v2[0]+v1[1]*v2[1]+v1[2]*v2[2]
+    RETURN (ps) ;
+END
+/* main program */
+ALGORITHM dot_product
+VAR
+    v1: ARRAY_OF FLOAT[3];
+    v2: ARRAY_OF FLOAT[3];
+    ps:FLOAT;
+    i,j:INTEGER;
+BEGIN
+    write("insert v1: x,y,z")
+    FOR i FROM 0 TO 2 STEP 1  DO
+        read(v1[i])
+    END_FOR
+    write("insert v2: x,y,z")
+    FOR j FROM 0 TO 2 STEP 1  DO
+        read(v2[j])
+    END_FOR
+    ps=dot_product(v1,v2)
+    IF (ps==0) THEN
+        write("v1 et v2 sont orthogonaux")
+    ELSE
+        write("v1 et v2 sont pas orthogonaux")
+    END_IF
+END

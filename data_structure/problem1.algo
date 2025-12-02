@@ -1,0 +1,44 @@
+
+/* checking for similar numbers */
+FUNCTION exist(x:INTEGER,set:ARRAY_OF INTEGER[]) : BOOLEAN
+VAR
+    res:BOOLEAN:= FALSE;
+    i:INTEGER:=0;
+BEGIN
+
+REPEAT
+    IF (x==set[i]) THEN
+        res=TRUE
+    ELSE
+        i=i+1
+    END_IF
+UNTIL (res==TRUE OR i>length(set))
+    RETURN res ;
+END
+
+/* calculating sum of different numbers */
+PROCEDURE sum(VAR s:INTEGER, set1,set2:ARRAY_OF INTEGER[])
+VAR
+    i,j:INTEGER;
+BEGIN
+    FOR i FROM 0 TO length(set1)-1 STEP 1  DO
+        IF (exist(set1[i],set2)==FALSE) THEN
+            s=s+set1[i];
+        END_IF
+    END_FOR
+    FOR j FROM 0 TO length(set2)-1 STEP 1  DO
+        IF (exist(set2[j],set1)==FALSE) THEN
+            s=s+set2[j];
+        END_IF
+    END_FOR
+END 
+/* main program */
+ALGORITHM problem1
+VAR:
+    set1 : ARRAY_OF INTEGER[];
+    set2 : ARRAY_OF INTEGER[];
+    s:INTEGER:=0;
+BEGIN
+    sum(s,set1,set2);
+    write(sum);
+END
